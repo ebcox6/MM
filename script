@@ -1,0 +1,42 @@
+document.addEventListener("DOMContentLoaded", function() {
+    const bracketContainer = document.getElementById("bracket");
+    
+    // Sample matchups from Excel data
+    const matchups = [
+        { question: "What is greater: 40% of 500 or 35% of 600?", answer: "35% of 600 (210.0) is greater" },
+        { question: "What is greater: 18% of 900 or 22% of 750?", answer: "22% of 750 (165.0) is greater" },
+        // Add more matchups...
+    ];
+    
+    function createMatchup(matchup, index) {
+        const div = document.createElement("div");
+        div.classList.add("matchup");
+        
+        const question = document.createElement("p");
+        question.textContent = matchup.question;
+        
+        const button = document.createElement("button");
+        button.textContent = "Show Answer";
+        button.classList.add("button");
+        
+        const answer = document.createElement("p");
+        answer.textContent = matchup.answer;
+        answer.classList.add("winner");
+        answer.style.display = "none";
+        
+        button.addEventListener("click", function() {
+            answer.style.display = "block";
+            button.disabled = true;
+        });
+        
+        div.appendChild(question);
+        div.appendChild(button);
+        div.appendChild(answer);
+        
+        return div;
+    }
+    
+    matchups.forEach((matchup, index) => {
+        bracketContainer.appendChild(createMatchup(matchup, index));
+    });
+});
